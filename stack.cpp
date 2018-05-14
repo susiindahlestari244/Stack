@@ -11,35 +11,32 @@ using namespace std;
 	bool Operand(char C);
 
 
-			string infix_ke_postfix(string ekspresi)
-			{ 
+			string infix_ke_postfix(string ekspresi){ 
 			stack<char> S;
 			string postfix = ""; 
 			for(int i = 0;i< ekspresi.length();i++) {
-
 			if(ekspresi[i] == ' ' || ekspresi[i] == ',') continue; 
-
-			else if(Operator(ekspresi[i])) 
-			{
-			while(!S.empty() && S.top() != '(' && tingkat_operator(S.top(),ekspresi[i]))
-			{
+			else if(Operator(ekspresi[i])){
+			
+			while(!S.empty() && S.top() != '(' && tingkat_operator(S.top(),ekspresi[i])){
+			
 				postfix+= S.top();
 				S.pop();
 			}
 			S.push(ekspresi[i]);
-		  }
-		  else if(Operand(ekspresi[i]))
-		  {
+		}
+		else if(Operand(ekspresi[i])){
+		
 			postfix +=ekspresi[i];
-		  }
+		}
 
-		else if (ekspresi[i] == '(') 
-		{
+		else if (ekspresi[i] == '('){ 
+		
 			S.push(ekspresi[i]);
 		}
 
-		else if(ekspresi[i] == ')') 
-		{
+		else if(ekspresi[i] == ')'){
+		
 			while(!S.empty() && S.top() !=  '(') {
 				postfix += S.top();
 				S.pop();
@@ -56,34 +53,33 @@ using namespace std;
 	return postfix;
 }
 
-bool Operand(char C) 
-{
+bool Operand(char C){
+
 	if(C >= '0' && C <= '9') return true;
 	if(C >= 'a' && C <= 'z') return true;
 	if(C >= 'A' && C <= 'Z') return true;
 	return false;
 }
 
-bool Operator(char C)
-{
+bool Operator(char C){
+
 	if(C == '+' || C == '-' || C == '*' || C == '/' || C== '$')
 		return true;
 
 	return false;
 }
 
+int Associative(char op){
 
-int Associative(char op)
-{
 	if(op == '$') return true;
 	return false;
 }
  
-int carioperator(char op)
-{
+int carioperator(char op){
+
 	int weight = -1; 
-	switch(op)
-	{
+	switch(op){
+	
 	case '+':
 		
 	case '-':
@@ -99,15 +95,16 @@ int carioperator(char op)
 	return weight;
 }
 
-int tingkat_operator(char op1, char op2)
-{
+int tingkat_operator(char op1, char op2){
+
 	int op1Weight = carioperator(op1);
 	int op2Weight = carioperator(op2);
  
-	if(op1Weight == op2Weight)
-	{
+	if(op1Weight == op2Weight){
+	
 		if(Associative(op1)) return false;
 		else return true;
+		
 	}
 	return op1Weight > op2Weight ?  true: false;
 }
@@ -115,15 +112,15 @@ int tingkat_operator(char op1, char op2)
 
 
 
-struct Stack
-{
+struct Stack{
+
     int top;
     unsigned capacity;
     int* array;
 };
  
-struct Stack* createStack( unsigned capacity )
-{
+struct Stack* createStack( unsigned capacity ){
+
     struct Stack* stack = (struct Stack*) malloc(sizeof(struct Stack));
  
     if (!stack) return NULL;
@@ -137,46 +134,42 @@ struct Stack* createStack( unsigned capacity )
     return stack;
 }
  
-int isEmpty(struct Stack* stack)
-{
+int isEmpty(struct Stack* stack){
+
     return stack->top == -1 ;
 }
  
-char peek(struct Stack* stack)
-{
+char peek(struct Stack* stack){
+
     return stack->array[stack->top];
 }
  
-char pop(struct Stack* stack)
-{
+char pop(struct Stack* stack){
+
     if (!isEmpty(stack))
         return stack->array[stack->top--] ;
     return '$';
 }
  
-void push(struct Stack* stack, char op)
-{
+void push(struct Stack* stack, char op){
+
     stack->array[++stack->top] = op;
 }
  
  
-int evaluatePostfix(char* exp)
-{
+int evaluatePostfix(char* exp){
+
     struct Stack* stack = createStack(strlen(exp));
     int i;
  
     if (!stack) return -1;
- 
-    for (i = 0; exp[i]; ++i)
-    {
-        if (isdigit(exp[i]))
+ 	for (i = 0; exp[i]; ++i){
+   	 if (isdigit(exp[i]))
             push(stack, exp[i] - '0');
-        else
-        {
+        else{
             int val1 = pop(stack);
             int val2 = pop(stack);
-            switch (exp[i])
-            {
+            switch (exp[i]){
              case '+': push(stack, val2 + val1); break;
              case '-': push(stack, val2 - val1); break;
              case '*': push(stack, val2 * val1); break;
@@ -187,9 +180,12 @@ int evaluatePostfix(char* exp)
     return pop(stack);
 }
  
-int main()
-{
-  
+
+int main(){
+	cout<<"===================================================="<<endl;
+	cout<<"\t\t Mayda Brilliani Fauzi 1717051003"<<endl;
+	cout<<"\t\t Susi Indah Lestari S1717051035"<<endl;
+	cout<<"===================================================="<<endl;
 	string ekspresi;
 	
 	ekspresi="5*(6+2)+4-8";
