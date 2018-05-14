@@ -184,16 +184,16 @@ int evaluatePostfix(char* exp){
 int main(){
 	cout<<"===================================================="<<endl;
 	cout<<"\t\t Mayda Brilliani Fauzi 1717051003"<<endl;
-	cout<<"\t\t Susi Indah Lestari S1717051035"<<endl;
+	cout<<"\t\t Susi Indah Lestari 1717051035"<<endl;
 	cout<<"===================================================="<<endl;
 	string ekspresi;
 	
 	ekspresi="5*(6+2)+4-8";
-	cout<<"expresi = "<<ekspresi<<endl<<endl;
+	cout<<"infix = "<<ekspresi<<endl<<endl;
 	
 	string postfix = infix_ke_postfix(ekspresi);
-	cout<<"menjadi posfix = "<<postfix<<endl;
+	cout<<" ke bentuk postfix = "<<postfix<<endl;
     char exp[] = "562+*4+8-";
-    cout<<"hasil dari "<<exp<<" adalah "<< evaluatePostfix(exp);
+    cout<<"hasil akhir= "<<exp<<" adalah "<< evaluatePostfix(exp);
     return 0;
 }
